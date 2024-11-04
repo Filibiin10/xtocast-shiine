@@ -50,18 +50,18 @@ const upload = multer({ storage: storage });
 // Serve static files from the uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// app.post('/uploads', upload.single('image'), (req, res) => {
-//     console.log(req.file)
-//     if (!req.file) {
-//         return res.status(400).json({ message: 'No file uploaded.' });
-//     }
+app.post('/uploads', upload.single('image'), (req, res) => {
+    console.log(req.file)
+    if (!req.file) {
+        return res.status(400).json({ message: 'No file uploaded.' });
+    }
 
-//     const imageUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`; // Create the full URL for the uploaded image
-//     res.json({
-//         message: 'File uploaded successfully!',
-//         image: imageUrl // Return the full URL
-//     });
-// });
+    const imageUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`; // Create the full URL for the uploaded image
+    res.json({
+        message: 'File uploaded successfully!',
+        image: imageUrl // Return the full URL
+    });
+});
 
 
 // Routes
